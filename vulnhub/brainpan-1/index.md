@@ -1,6 +1,6 @@
 # VulnHub Brainpan: 1
 
-> Author: Hades - [LeeCyberSec](leecybersec.com)
+> Author: Hades - [LeeCyberSec](https://leecybersec.com)
 
 > [*Scripting here*](https://github.com/leecybersec/scripting)
 
