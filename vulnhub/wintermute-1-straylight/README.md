@@ -159,7 +159,7 @@ I find some log in the Kali Machine to trying access it in the server with paylo
 
 I used Postfix SMTP and sent a email with [php backdoor](https://github.com/leecybersec/web-shell/blob/master/php/backdoor.php)
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/vulnhub/wintermute-1)
+> [*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/vulnhub/wintermute-1-straylight)
 
 ``` bash
 ┌──(Hades㉿192.168.56.110)-[3.0:40.9]~/scripting
@@ -249,7 +249,7 @@ Shellcodes: No Results
 
 At `/tmp` in the unix machine, I create 2 file `libhax.c` `rootshell.c` and run `poc.sh` to get root.
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/vulnhub/wintermute-1)
+> [*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/vulnhub/wintermute-1-straylight)
 
 ``` bash
 bash poc.sh 2> /dev/null
@@ -262,7 +262,7 @@ bash poc.sh 2> /dev/null
 Enum network, there are 2 interfaces `enp0s3` and `enp0s8`
 
 ```txt
-root@straylight:/tmp# ifconfig                                                                                                                                              
+root@straylight:/tmp# ifconfig
 enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.56.102  netmask 255.255.255.0  broadcast 192.168.56.255
         inet6 fe80::a00:27ff:fe0e:1b0d  prefixlen 64  scopeid 0x20<link>
@@ -283,7 +283,7 @@ enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 <snip>
 ```
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/vulnhub/wintermute-1)
+> [*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/vulnhub/wintermute-1-straylight)
 
 ``` txt
 root@straylight:/tmp# bash pingSweeping.sh 192.168.107
