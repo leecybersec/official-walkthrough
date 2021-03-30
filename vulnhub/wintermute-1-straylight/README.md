@@ -302,4 +302,4 @@ root@straylight:/tmp# nc -nv -w 1 -z 192.168.107.107 1-65535
 (UNKNOWN) [192.168.107.107] 8009 (?) open
 ```
 
-# [WinterMute: 1 (Neuromancer)](/walkthrough/vulnhub/Wintermute-1-Neuromancer/)
+# [WinterMute: 1 (Neuromancer)](/vulnhub/Wintermute-1-Neuromancer/)
