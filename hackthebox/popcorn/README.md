@@ -268,11 +268,11 @@ whoami
 root
 ```
 
-### 'Dirty COW' Kernel
+### 'Full-Nelson.c Exploit Kernel
 
 [*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/popcorn)
 
-Also check kernel, the OS version is `2.6.31-14-generic-pae`. Search it with google and I found the exploit in the first result.
+Also check kernel, the OS version is `2.6.31-14-generic-pae`.
 
 ```
 www-data@popcorn:/home/george$ uname -a
@@ -283,7 +283,20 @@ cat /etc/issue
 Ubuntu 9.10 \n \l
 ```
 
-![](images/11.png)
+Search exploit using `searchsploit`
+
+```
+┌──(Hades㉿10.10.14.5)-[2.2:50.4]~
+└─$ searchsploit Linux Kernel 2.6 Ubuntu
+---------------------------------------------------- ---------------------------------
+ Exploit Title                                      |  Path
+---------------------------------------------------- ---------------------------------
+<snip>
+Linux Kernel 2.6.37 (RedHat / Ubuntu 10.04) - 'Full | linux/local/15704.c
+<snip>
+---------------------------------------------------- ---------------------------------
+Shellcodes: No Results
+```
 
 Tranfer exploit `15704.c` to `Popcorn server`, compile and execute it, I have root.
 
