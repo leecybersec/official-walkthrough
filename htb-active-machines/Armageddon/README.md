@@ -1,6 +1,6 @@
 # \_\__LeeCyberSec_\_\_
 | **I'm Hades - Red/purple teamer** | **Hack The Box - Armageddon** |
-| :-------------------------------: |-------------------------------|
+| :-------------------------------- |-------------------------------|
 | `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com)<br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | ![](images/1.png) |
 
 ## Information Gathering
