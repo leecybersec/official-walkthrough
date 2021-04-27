@@ -8,7 +8,7 @@
     <div>
         <table>
             <tr>
-                <td width="30">Command:</td>
+                <td width="30">Input:</td>
                 <td><asp:TextBox ID="txtCommand" runat="server" Width="820px"></asp:TextBox></td>
             </tr>
 	    <tr>
