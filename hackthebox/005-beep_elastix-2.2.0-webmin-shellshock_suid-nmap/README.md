@@ -1,27 +1,32 @@
 # \_\__LeeCyberSec_\_\_
 | About Author | **Hack The Box Walkthrough** |
 | :-------------------------------- |-------------------------------|
-| **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | ![](images/1.png) |
+| **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
 ## Information Gathering
 
 ### Openning Services
 
-```
-┌──(Hades㉿10.10.14.5)-[2.3:28.8]~/scripting
-└─$ sudo ./enum/all.sh 10.10.10.7
-[sudo] password for kali: 
++ Postfix smtpd
++ Apache/2.2.3 (CentOS)
++ Cyrus pop3d 2.3.7-Invoca-RPM
++ MySQL (unauthorized)
++ HylaFAX 4.3.10
++ Asterisk Call Manager 1.1
++ MiniServ 1.570 (Webmin httpd)
 
+```
 ### Port Scanning ############################
-nmap -sS -p- --min-rate 1000 10.10.10.7 | grep ^[0-9] | cut -d '/' -f1 | tr '\n' ',' | sed s/,$//
+nmap -sS -Pn -p- --min-rate 1000 10.10.10.7
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
 
 [+] Openning ports: 22,25,80,110,111,143,443,878,993,995,3306,4190,4445,4559,5038,10000
 
 ### Services Enumeration ############################
 nmap -sC -sV -Pn 10.10.10.7 -p22,25,80,110,111,143,443,878,993,995,3306,4190,4445,4559,5038,10000
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-04-02 10:40 +07
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-04-28 10:40 +07
 Nmap scan report for 10.10.10.7
-Host is up (0.25s latency).
+Host is up (0.26s latency).
 
 PORT      STATE SERVICE    VERSION
 22/tcp    open  ssh        OpenSSH 4.3 (protocol 2.0)
@@ -34,7 +39,7 @@ PORT      STATE SERVICE    VERSION
 |_http-server-header: Apache/2.2.3 (CentOS)
 |_http-title: Did not follow redirect to https://10.10.10.7/
 110/tcp   open  pop3       Cyrus pop3d 2.3.7-Invoca-RPM-2.3.7-7.el5_6.4
-|_pop3-capabilities: UIDL RESP-CODES EXPIRE(NEVER) STLS IMPLEMENTATION(Cyrus POP3 server v2) TOP AUTH-RESP-CODE LOGIN-DELAY(0) USER APOP PIPELINING
+|_pop3-capabilities: STLS APOP PIPELINING TOP LOGIN-DELAY(0) IMPLEMENTATION(Cyrus POP3 server v2) AUTH-RESP-CODE RESP-CODES USER UIDL EXPIRE(NEVER)
 111/tcp   open  rpcbind    2 (RPC #100000)
 | rpcinfo: 
 |   program version    port/proto  service
@@ -43,12 +48,12 @@ PORT      STATE SERVICE    VERSION
 |   100024  1            875/udp   status
 |_  100024  1            878/tcp   status
 143/tcp   open  imap       Cyrus imapd 2.3.7-Invoca-RPM-2.3.7-7.el5_6.4
-|_imap-capabilities: IMAP4rev1 Completed RENAME THREAD=REFERENCES ID MAILBOX-REFERRALS URLAUTHA0001 X-NETSCAPE CATENATE LIST-SUBSCRIBED LISTEXT QUOTA NAMESPACE IDLE CONDSTORE ATOMIC ACL ANNOTATEMORE BINARY MULTIAPPEND LITERAL+ OK SORT NO THREAD=ORDEREDSUBJECT RIGHTS=kxte SORT=MODSEQ UNSELECT CHILDREN STARTTLS UIDPLUS IMAP4
+|_imap-capabilities: ID IDLE ACL X-NETSCAPE LIST-SUBSCRIBED RENAME OK QUOTA BINARY CHILDREN CATENATE URLAUTHA0001 UNSELECT LISTEXT Completed IMAP4 CONDSTORE MAILBOX-REFERRALS SORT=MODSEQ SORT MULTIAPPEND ANNOTATEMORE UIDPLUS THREAD=REFERENCES ATOMIC NAMESPACE LITERAL+ THREAD=ORDEREDSUBJECT NO RIGHTS=kxte IMAP4rev1 STARTTLS
 443/tcp   open  ssl/https?
 | ssl-cert: Subject: commonName=localhost.localdomain/organizationName=SomeOrganization/stateOrProvinceName=SomeState/countryName=--
 | Not valid before: 2017-04-07T08:22:08
 |_Not valid after:  2018-04-07T08:22:08
-|_ssl-date: 2021-04-02T03:57:36+00:00; +13m59s from scanner time.
+|_ssl-date: 2021-04-28T03:45:41+00:00; +1m26s from scanner time.
 878/tcp   open  status     1 (RPC #100024)
 993/tcp   open  ssl/imap   Cyrus imapd
 |_imap-capabilities: CAPABILITY
@@ -68,10 +73,10 @@ PORT      STATE SERVICE    VERSION
 Service Info: Hosts:  beep.localdomain, 127.0.0.1, example.com, localhost; OS: Unix
 
 Host script results:
-|_clock-skew: 13m58s
+|_clock-skew: 1m25s
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 400.58 seconds
+Nmap done: 1 IP address (1 host up) scanned in 409.33 seconds
 ```
 
 ### Postfix smtpd
@@ -121,10 +126,6 @@ At port 80, using `gobuster` to get a list of hidden in the web port. Should try
 [+] Files and directories
 gobuster dir -k -u https://10.10.10.7:443 -w /usr/share/seclists/Discovery/Web-Content/common.txt
 <snip>
-===============================================================
-/.hta                 (Status: 403) [Size: 282]
-/.htaccess            (Status: 403) [Size: 287]
-/.htpasswd            (Status: 403) [Size: 287]
 /admin                (Status: 301) [Size: 309] [--> https://10.10.10.7/admin/]
 /cgi-bin/             (Status: 403) [Size: 286]                                
 /configs              (Status: 301) [Size: 311] [--> https://10.10.10.7/configs/]
@@ -140,8 +141,7 @@ gobuster dir -k -u https://10.10.10.7:443 -w /usr/share/seclists/Discovery/Web-C
 /robots.txt           (Status: 200) [Size: 28]                                   
 /static               (Status: 301) [Size: 310] [--> https://10.10.10.7/static/] 
 /themes               (Status: 301) [Size: 310] [--> https://10.10.10.7/themes/] 
-/var                  (Status: 301) [Size: 307] [--> https://10.10.10.7/var/]    
-<snip>
+/var                  (Status: 301) [Size: 307] [--> https://10.10.10.7/var/]
 ```
 
 ### Elastix

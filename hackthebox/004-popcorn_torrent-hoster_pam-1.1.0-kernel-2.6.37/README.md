@@ -231,8 +231,6 @@ root
 
 ### 'Full-Nelson.c Exploit Kernel
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/popcorn)
-
 Also check kernel, the OS version is `2.6.31-14-generic-pae`.
 
 ```
