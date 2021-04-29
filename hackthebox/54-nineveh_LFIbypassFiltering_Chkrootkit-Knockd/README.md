@@ -3,6 +3,24 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Openning Services](#openning-services)
+	- [Web Application 80](#web-application-80)
+	- [Web Application 443](#web-application-443)
+- [Foothold](#foothold)
+	- [LFI within filtering](#lfi-within-filtering)
+	- [PHP Code Injection](#php-code-injection)
+	- [PHP Backdoor](#php-backdoor)
+- [Privilege Escalation](#privilege-escalation)
+	- [Chkrootkit Local PriEscal](#chkrootkit-local-priescal)
+	- [Steganography and Knockd](#steganography-and-knockd)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services

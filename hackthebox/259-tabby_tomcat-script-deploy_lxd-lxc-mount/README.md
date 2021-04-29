@@ -3,6 +3,23 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+  - [Openning Services](#openning-services)
+  - [Apache httpd 2.4.41](#apache-httpd-2441)
+  - [Apache Tomcat 9](#apache-tomcat-9)
+- [Foothold](#foothold)
+  - [Path Travel to Tomcat Creds](#path-travel-to-tomcat-creds)
+  - [Manager script deploy](#manager-script-deploy)
+- [Privilege Escalation](#privilege-escalation)
+  - [Zip Password Cracking](#zip-password-cracking)
+  - [lxd/lxc mount file](#lxdlxc-mount-file)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services

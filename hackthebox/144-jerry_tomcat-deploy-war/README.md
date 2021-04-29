@@ -3,6 +3,18 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Openning Services](#openning-services)
+	- [Apache Tomcat/7.0.88](#apache-tomcat7088)
+- [Foothold](#foothold)
+	- [WAR file upload](#war-file-upload)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services

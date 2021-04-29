@@ -3,6 +3,29 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Openning Services](#openning-services)
+	- [Postfix smtpd](#postfix-smtpd)
+	- [Apache/2.2.3 \(CentOS\)](#apache223-centos)
+	- [Elastix](#elastix)
+	- [FreePBX 2.8.1.4](#freepbx-2814)
+	- [RoundCube Webmail](#roundcube-webmail)
+	- [vtiger CRM 5.1.0](#vtiger-crm-510)
+	- [MiniServ 1.570](#miniserv-1570)
+- [Foothold](#foothold)
+	- [LFI leaked Credential](#lfi-leaked-credential)
+	- [LFI and Postfix smtpd](#lfi-and-postfix-smtpd)
+	- [VoIP Command Injection](#voip-command-injection)
+	- [Webmin Shellshock](#webmin-shellshock)
+- [Privilege Escalation](#privilege-escalation)
+	- [Sudo and Suid](#sudo-and-suid)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services

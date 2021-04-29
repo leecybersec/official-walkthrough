@@ -3,6 +3,24 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Openning Services](#openning-services)
+	- [Torrent Hoster](#torrent-hoster)
+- [Foothold](#foothold)
+	- [File Upload Bypass](#file-upload-bypass)
+	- [Gain Reverse Shell](#gain-reverse-shell)
+- [Privilege Escalation](#privilege-escalation)
+	- [Mysql Credential](#mysql-credential)
+	- [Linux PAM 1.1.0](#linux-pam-110)
+	- ['Full-Nelson.c Exploit Kernel](#full-nelsonc-exploit-kernel)
+- [Reference](#reference)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services

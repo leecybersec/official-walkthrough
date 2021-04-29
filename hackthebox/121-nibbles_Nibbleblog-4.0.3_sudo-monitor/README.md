@@ -3,6 +3,22 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Openning Services](#openning-services)
+	- [Apache httpd 2.4.18](#apache-httpd-2418)
+	- [Nibbleblog 4.0.3](#nibbleblog-403)
+- [Foothold](#foothold)
+	- [Guessable Admin Credential](#guessable-admin-credential)
+	- [Nibbleblog 4.0.3 Upload](#nibbleblog-403-upload)
+- [Privilege Escalation](#privilege-escalation)
+	- [Sudo access file overwrite](#sudo-access-file-overwrite)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services

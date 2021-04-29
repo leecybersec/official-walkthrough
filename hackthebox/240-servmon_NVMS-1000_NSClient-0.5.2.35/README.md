@@ -3,6 +3,25 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Openning Services](#openning-services)
+	- [Microsoft ftpd 21](#microsoft-ftpd-21)
+	- [NVMS 1000 80](#nvms-1000-80)
+	- [Server Message Block](#server-message-block)
+	- [NSClient++ 8443](#nsclient-8443)
+- [Foothold](#foothold)
+	- [Direc Travel SSH Credential](#direc-travel-ssh-credential)
+- [Privilege Escalation](#privilege-escalation)
+	- [SSH Local Port Forwarding](#ssh-local-port-forwarding)
+	- [Simple Bypass Defender](#simple-bypass-defender)
+	- [NSClient Script Exploitation](#nsclient-script-exploitation)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Openning Services
