@@ -271,8 +271,6 @@ uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10
 
 ### LFI and Postfix smtpd
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/beep)
-
 After gathering information in the server, I have 2 LFI vulnerabilities:
 
 1. Elastix 2.2.0 - 'graph.php' Local File Inclusion
@@ -360,8 +358,6 @@ bash-3.2$
 
 ### VoIP Command Injection
 
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/beep)
-
 I used exploit `php/webapps/18650.py` found when I enum Elastix.
 
 Detect VoIP system using svmap
@@ -420,8 +416,6 @@ bash-3.2$
 ```
 
 ### Webmin Shellshock
-
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/beep)
 
 Webmin using `session_login.cgi`, it can be exploit using shellshock payload.
 

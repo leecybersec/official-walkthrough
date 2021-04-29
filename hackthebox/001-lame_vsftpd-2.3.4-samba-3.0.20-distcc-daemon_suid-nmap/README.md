@@ -3,6 +3,25 @@
 | :-------------------------------- |-------------------------------|
 | **I'm Hades - Red/purple teamer** <br> `Email:` [tuvn@protonmail.com](mailto:tuvn@protonmail.com) <br> <br> `Platform:` [HackTheBox](https://www.hackthebox.eu/profile/167764) \|\| [TryHackMe](https://tryhackme.com/p/leecybersec) \|\| [PentesterLab](https://pentesterlab.com/profile/leecybersec) <br> <br> <img src="http://www.hackthebox.eu/badge/image/167764" alt="Hack The Box"> <br> <br> *Support me at [buymeacoffee](https://www.buymeacoffee.com/leecybersec)* <br> <a href='https://www.buymeacoffee.com/leecybersec' target="blank"><img src="images/bymeacoffee.png" width="200"/></a> | <img src="images/1.png" width="555"/></a> |
 
+# Table of contents
+
+<!-- MarkdownTOC -->
+
+- [Information Gathering](#information-gathering)
+	- [Open Services](#open-services)
+	- [vsftpd 2.3.4](#vsftpd-234)
+	- [Samba smbd 3.0.20-Debian](#samba-smbd-3020-debian)
+	- [distccd v1 \((GNU\) 4.2.4](#distccd-v1-gnu-424)
+- [Foothold](#foothold)
+	- [vsftpd-2.3.4-exploit](#vsftpd-234-exploit)
+	- [CVE-2007-2447](#cve-2007-2447)
+	- [CVE-2004-2687](#cve-2004-2687)
+- [Privilege Escalation](#privilege-escalation)
+	- [Binaries That AutoElevate - Nmap](#binaries-that-autoelevate---nmap)
+- [Reference](#reference)
+
+<!-- /MarkdownTOC -->
+
 ## Information Gathering
 
 ### Open Services
