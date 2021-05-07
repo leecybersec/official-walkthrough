@@ -8,12 +8,12 @@
 <!-- MarkdownTOC -->
 
 - [Information Gathering](#information-gathering)
-	- [Openning Services](#openning-services)
-	- [Drupal Application](#drupal-application)
+    - [Openning Services](#openning-services)
+    - [Drupal Application](#drupal-application)
 - [Foothold](#foothold)
-	- [CVE-2018-7600](#cve-2018-7600)
+    - [drupa 7.54 CVE-2018-7600](#drupa-754-cve-2018-7600)
 - [Privilege Escalation](#privilege-escalation)
-	- [CVE-2015-1701](#cve-2015-1701)
+    - [CVE-2015-1701](#cve-2015-1701)
 
 <!-- /MarkdownTOC -->
 
@@ -21,9 +21,12 @@
 
 ### Openning Services
 
++ Microsoft IIS httpd 7.5 (robots.txt: 36 disallowed entries)
++ msrpc Microsoft Windows RPC
+
 ```
 ### Port Scanning ############################
-nmap -sS -p- --min-rate 1000 10.10.10.9 | grep ^[0-9] | cut -d '/' -f1 | tr '\n' ',' | sed s/,$//
+nmap -sS -p- --min-rate 1000 10.10.10.9
 
 [+] Openning ports: 80,135,49154
 
@@ -129,9 +132,7 @@ Shellcodes: No Results
 
 ## Foothold
 
-### CVE-2018-7600
-
-[*Poc code here*](https://github.com/leecybersec/walkthrough/tree/master/hackthebox/bastard)
+### drupa 7.54 CVE-2018-7600
 
 At exploit `php/webapps/44448.py`, I know that this is exploit for CVE-2018-7600, but Drupal 7.x have the vulberability at form `user_pass` and inject code in `name`. Find some exploit in google and I found [drupa7-CVE-2018-7600.py](https://github.com/pimps/CVE-2018-7600/blob/master/drupa7-CVE-2018-7600.py)
 

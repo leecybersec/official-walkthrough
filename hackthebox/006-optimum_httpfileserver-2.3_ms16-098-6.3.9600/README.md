@@ -22,6 +22,8 @@
 
 ### Openning Services
 
++ HttpFileServer httpd 2.3
+
 ```
 ### Port Scanning ############################
 nmap -sS -p- --min-rate 1000 10.10.10.8
