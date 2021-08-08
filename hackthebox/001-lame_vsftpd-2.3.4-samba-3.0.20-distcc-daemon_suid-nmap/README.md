@@ -18,7 +18,6 @@
 	- [CVE-2004-2687](#cve-2004-2687)
 - [Privilege Escalation](#privilege-escalation)
 	- [Binaries That AutoElevate - Nmap](#binaries-that-autoelevate---nmap)
-- [Reference](#reference)
 
 <!-- /MarkdownTOC -->
 
@@ -190,6 +189,8 @@ PORT     STATE SERVICE
 
 ### vsftpd-2.3.4-exploit
 
+[https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable](https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable)
+
 Base on `searchsploit`, we know the vsftpd 2.3.4 might contain a backdoor which has been created by an intruder. The backdoor payload is initiated in response to a :) character combination in the username which represents a smiley face. The code sets up a bind shell listener on port 6200.
 
 Trigger the backdoor and execute command `whoami`
@@ -281,7 +282,3 @@ nmap> !sh
 ```
 
 ![](images/7.png)
-
-## Reference
-
-[https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable](https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable)
